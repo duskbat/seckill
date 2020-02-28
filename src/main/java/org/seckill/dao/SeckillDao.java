@@ -12,7 +12,6 @@ import java.util.List;
  **/
 public interface SeckillDao {
 
-    //这里 date考虑到线程安全了吗
     int reduceNumber(long seckillId, Date killTime);
 
     Seckill queryById(long seckillId);

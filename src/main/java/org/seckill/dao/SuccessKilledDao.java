@@ -12,7 +12,6 @@ public interface SuccessKilledDao {
     int insertSuccessKilled(long seckillId, long userPhone);
 
     /**
-     * 可以查出很多条记录，不止一条
      * @param seckillId
      * @return
      */
