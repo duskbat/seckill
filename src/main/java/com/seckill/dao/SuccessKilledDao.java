@@ -1,6 +1,6 @@
-package org.seckill.dao;
+package com.seckill.dao;
 
-import org.seckill.entity.SuccessKilled;
+import com.seckill.entity.SuccessKilled;
 
 /**
  * @description:

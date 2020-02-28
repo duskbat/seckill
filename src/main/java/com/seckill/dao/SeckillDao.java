@@ -1,6 +1,6 @@
-package org.seckill.dao;
+package com.seckill.dao;
 
-import org.seckill.entity.Seckill;
+import com.seckill.entity.Seckill;
 
 import java.util.Date;
 import java.util.List;
