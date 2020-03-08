@@ -8,7 +8,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
+/**
+ * 配置spring和junit整合，junit启动时加载springIOC容器
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
+/*
+ * 告诉junit spring配置文件
+ */
 @ContextConfiguration({"classpath:spring/spring-dao.xml"})
 public class SeckillDaoTest {
 
@@ -16,7 +22,7 @@ public class SeckillDaoTest {
     private SeckillDao seckillDao;
 
     @Test
-    public void reduceNumber() throws Exception{
+    public void reduceNumber() throws Exception {
 
     }
 
@@ -25,6 +31,7 @@ public class SeckillDaoTest {
         long id = 1000;
         Seckill seckill = seckillDao.queryById(id);
         System.out.println(seckill.getName());
+        System.out.println(seckill);
     }
 
     @Test
