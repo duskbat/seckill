@@ -87,7 +87,7 @@ public class SeckillController {
 
         } catch (RepeatKillException repeatEx) {
             execution = new SeckillExecution(seckillId, SeckillStatEnum.REPEAT_KILL);
-            result = new SeckillResult<SeckillExecution>(false, execution);
+            result = new SeckillResult<SeckillExecution>(true, execution);
 
         } catch (Exception e) {
             logger.info(e.getMessage(), e);
