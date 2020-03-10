@@ -31,7 +31,7 @@ public class SeckillController {
     public String list(Model model) {
         List<Seckill> list = seckillService.getSuccessKillList();
         model.addAttribute("list", list);
-        return "list";
+        return "/list";
     }
 
 
@@ -45,7 +45,7 @@ public class SeckillController {
             return "forward:/seckill/list";
         }
         model.addAttribute("seckill", seckill);
-        return "detail";
+        return "/detail";
     }
 
     @RequestMapping(value = "/{seckillId}/exposer",
