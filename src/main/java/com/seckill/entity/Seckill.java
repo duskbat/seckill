@@ -2,6 +2,7 @@ package com.seckill.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
  * 实体类的属性有基本int类型
  **/
 @Data
-public class Seckill {
+public class Seckill  {
 
     /**
      * 商品id
