@@ -73,15 +73,15 @@ public class SeckillServiceImpl implements SeckillService {
         }
         Date nowTime = new Date();
         try {
-            //减库存
-            int updateCount = seckillDao.reduceNumber(seckillId, nowTime);
-            if (updateCount <= 0) {
-                throw new SeckillCloseException("秒杀结束");
+            //记录购买明细
+            int insertCount = successKilledDao.insertSuccessKilled(seckillId, userPhone);
+            if (insertCount <= 0) {
+                throw new RepeatKillException("重复秒杀");
             } else {
-                //记录购买明细
-                int insertCount = successKilledDao.insertSuccessKilled(seckillId, userPhone);
-                if (insertCount <= 0) {
-                    throw new RepeatKillException("重复秒杀");
+                //减库存
+                int updateCount = seckillDao.reduceNumber(seckillId, nowTime);
+                if (updateCount <= 0) {
+                    throw new SeckillCloseException("秒杀结束");
                 } else {
                     SuccessKilled successKilled = successKilledDao.queryByIdWithSeckill(seckillId, userPhone);
                     return new SeckillExecution(seckillId, SeckillStatEnum.SUCCESS, successKilled);
@@ -99,8 +99,7 @@ public class SeckillServiceImpl implements SeckillService {
 
     private String getMD5(long seckillId) {
         String base = seckillId + "/" + slat;
-        String md5 = DigestUtils.md5DigestAsHex(base.getBytes());
-        return md5;
+        return DigestUtils.md5DigestAsHex(base.getBytes());
     }
 }
 

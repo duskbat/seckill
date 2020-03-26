@@ -26,7 +26,7 @@ public class RedisDao {
             Jedis jedis = jedisPool.getResource();
             try {
                 String key = "seckill:" + seckillId;
-                //val
+                // val
                 byte[] bytes = jedis.get(key.getBytes());
 
                 if (bytes != null) {
@@ -48,12 +48,9 @@ public class RedisDao {
             Jedis jedis = jedisPool.getResource();
             try {
                 String key = "seckill:" + seckill.getSeckillId();
-                byte[] bytes = ProtostuffIOUtil.toByteArray(seckill,
-                        schema,
-                        LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE));
+                byte[] value = ProtostuffIOUtil.toByteArray(seckill, schema, LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE));
                 int timeout = 60 * 60;
-                String result = jedis.setex(key.getBytes(), timeout, bytes);
-                return result;
+                return jedis.setex(key.getBytes(), timeout, value);
             } finally {
                 jedis.close();
             }

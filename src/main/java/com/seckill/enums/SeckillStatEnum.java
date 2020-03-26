@@ -1,5 +1,14 @@
 package com.seckill.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+/**
+ * @author blinkbat
+ */
+
+@Getter
+@AllArgsConstructor
 public enum SeckillStatEnum {
     /**
      * 秒杀成功
@@ -12,19 +21,6 @@ public enum SeckillStatEnum {
 
     private int state;
     private String stateInfo;
-
-    SeckillStatEnum(int state, String stateInfo) {
-        this.state = state;
-        this.stateInfo = stateInfo;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public String getStateInfo() {
-        return stateInfo;
-    }
 
     public static SeckillStatEnum stateOf(int index) {
         for (SeckillStatEnum statEnum : values()) {
