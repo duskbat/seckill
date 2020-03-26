@@ -2,12 +2,14 @@ package com.seckill.dto;
 
 import com.seckill.entity.SuccessKilled;
 import com.seckill.enums.SeckillStatEnum;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
  * 封装秒杀执行后的结果
  */
 @Data
+@AllArgsConstructor
 public class SeckillExecution {
 
     /**

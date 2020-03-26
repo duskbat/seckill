@@ -10,11 +10,11 @@ import com.seckill.exception.SeckillCloseException;
 import com.seckill.service.SeckillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +23,7 @@ import java.util.List;
 public class SeckillController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
+    @Resource
     private SeckillService seckillService;
 
 
@@ -56,10 +56,10 @@ public class SeckillController {
         SeckillResult<Exposer> seckillResult;
         try {
             Exposer exposer = seckillService.exportSeckillUrl(seckillId);
-            seckillResult = new SeckillResult<Exposer>(true, exposer);
+            seckillResult = new SeckillResult<>(true, exposer);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            seckillResult = new SeckillResult<Exposer>(false, e.getMessage());
+            seckillResult = new SeckillResult<>(false, e.getMessage());
         }
         return seckillResult;
     }
@@ -73,26 +73,26 @@ public class SeckillController {
                                                    @PathVariable("md5") String md5) {
 
         if (userPhone == null) {
-            return new SeckillResult<SeckillExecution>(false, "未注册");
+            return new SeckillResult<>(false, "未注册");
         }
         SeckillResult<SeckillExecution> result;
         SeckillExecution execution;
         try {
-            execution = seckillService.executeSeckill(seckillId, userPhone, md5);
-            result = new SeckillResult<SeckillExecution>(true, execution);
+            execution = seckillService.executeSeckillProcedure(seckillId, userPhone, md5);
+            result = new SeckillResult<>(true, execution);
 
         } catch (SeckillCloseException closeEx) {
             execution = new SeckillExecution(seckillId, SeckillStatEnum.END);
-            result = new SeckillResult<SeckillExecution>(true, execution);
+            result = new SeckillResult<>(true, execution);
 
         } catch (RepeatKillException repeatEx) {
             execution = new SeckillExecution(seckillId, SeckillStatEnum.REPEAT_KILL);
-            result = new SeckillResult<SeckillExecution>(true, execution);
+            result = new SeckillResult<>(true, execution);
 
         } catch (Exception e) {
             logger.info(e.getMessage(), e);
             execution = new SeckillExecution(seckillId, SeckillStatEnum.INNER_ERROR);
-            result = new SeckillResult<SeckillExecution>(false, execution);
+            result = new SeckillResult<>(false, execution);
 
         }
         return result;
@@ -102,6 +102,6 @@ public class SeckillController {
     @ResponseBody
     public SeckillResult<Long> time() {
         Date now = new Date();
-        return new SeckillResult<Long>(true, now.getTime());
+        return new SeckillResult<>(true, now.getTime());
     }
 }
