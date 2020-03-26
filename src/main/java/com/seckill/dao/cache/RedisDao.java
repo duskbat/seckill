@@ -23,8 +23,7 @@ public class RedisDao {
 
     public Seckill getSeckill(long seckillId) {
         try {
-            Jedis jedis = jedisPool.getResource();
-            try {
+            try (Jedis jedis = jedisPool.getResource()) {
                 String key = "seckill:" + seckillId;
                 // val
                 byte[] bytes = jedis.get(key.getBytes());
@@ -34,8 +33,6 @@ public class RedisDao {
                     ProtostuffIOUtil.mergeFrom(bytes, seckill, schema);
                     return seckill;
                 }
-            } finally {
-                jedis.close();
             }
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -45,14 +42,11 @@ public class RedisDao {
 
     public String putSeckill(Seckill seckill) {
         try {
-            Jedis jedis = jedisPool.getResource();
-            try {
+            try (Jedis jedis = jedisPool.getResource()) {
                 String key = "seckill:" + seckill.getSeckillId();
                 byte[] value = ProtostuffIOUtil.toByteArray(seckill, schema, LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE));
                 int timeout = 60 * 60;
                 return jedis.setex(key.getBytes(), timeout, value);
-            } finally {
-                jedis.close();
             }
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

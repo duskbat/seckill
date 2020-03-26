@@ -2,6 +2,7 @@ package com.seckill.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,8 +11,9 @@ import java.util.Date;
  * @createTime: 2019-11-05 00:55
  **/
 @Data
-public class SuccessKilled {
+public class SuccessKilled implements Serializable {
 
+    private static final long serialVersionUID = -7024750536736805284L;
     /**
      * 商品id
      */

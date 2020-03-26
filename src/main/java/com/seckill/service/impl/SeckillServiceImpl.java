@@ -36,7 +36,7 @@ public class SeckillServiceImpl implements SeckillService {
     @Autowired
     private RedisDao redisDao;
 
-    private static final String slat = "wefs@$#ws43df%&^*(*df&";
+    private static final String SLAT = "wefs@$#ws43df%&^*(*df&";
 
     @Override
     public List<Seckill> getSuccessKillList() {
@@ -74,7 +74,7 @@ public class SeckillServiceImpl implements SeckillService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public SeckillExecution executeSeckill(long seckillId, long userPhone, String md5) throws SeckillException, RepeatKillException, SeckillCloseException {
+    public SeckillExecution executeSeckill(long seckillId, long userPhone, String md5) throws SeckillCloseException, RepeatKillException, SeckillException {
         if (md5 == null || !md5.equals(getMD5(seckillId))) {
             throw new SeckillException("秒杀数据被篡改");
         }
@@ -130,7 +130,7 @@ public class SeckillServiceImpl implements SeckillService {
     }
 
     private String getMD5(long seckillId) {
-        String base = seckillId + "/" + slat;
+        String base = seckillId + "/" + SLAT;
         return DigestUtils.md5DigestAsHex(base.getBytes());
     }
 }

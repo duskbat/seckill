@@ -13,8 +13,9 @@ import java.util.Date;
  * 实体类的属性有基本int类型
  **/
 @Data
-public class Seckill  {
+public class Seckill implements Serializable {
 
+    private static final long serialVersionUID = 2122169086812551464L;
     /**
      * 商品id
      */
