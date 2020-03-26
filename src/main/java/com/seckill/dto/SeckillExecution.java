@@ -2,7 +2,6 @@ package com.seckill.dto;
 
 import com.seckill.entity.SuccessKilled;
 import com.seckill.enums.SeckillStatEnum;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
