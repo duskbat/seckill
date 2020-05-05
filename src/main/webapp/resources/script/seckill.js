@@ -1,4 +1,5 @@
 var seckill = {
+
     //封装秒杀相关ajax的url
     URL: {
         now: function () {
@@ -11,6 +12,7 @@ var seckill = {
             return '/seckill/' + seckillId + '/' + md5 + '/execution';
         }
     },
+
     //详情页秒杀逻辑
     validatePhone: function (phone) {
         if (phone && phone.length == 11 && !isNaN(phone)) {
@@ -19,6 +21,7 @@ var seckill = {
             return false;
         }
     },
+
     countDown: function (seckillId, nowTime, startTime, endTime) {
         var seckillBox = $('#seckill-box');
         if (nowTime < startTime) {
@@ -37,6 +40,7 @@ var seckill = {
             seckill.handlerSeckill(seckillId, seckillBox);
         }
     },
+
     handlerSeckill: function (seckillId, node) {
         node.hide().html('<button class="btn btn-primary btn-lg" id="killBtn">开始秒杀</button>');
         $.post(seckill.URL.exposer(seckillId), {}, function (result) {
@@ -78,6 +82,7 @@ var seckill = {
             }
         });
     },
+
     detail: {
         //详情页初始化
         init: function (params) {
