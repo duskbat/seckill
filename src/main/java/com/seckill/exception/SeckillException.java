@@ -2,6 +2,7 @@ package com.seckill.exception;
 
 /**
  * 秒杀异常
+ * @author blinkbat
  */
 public class SeckillException extends RuntimeException {
 

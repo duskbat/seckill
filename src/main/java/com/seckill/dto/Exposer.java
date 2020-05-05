@@ -4,10 +4,12 @@ import lombok.Data;
 
 @Data
 public class Exposer {
+
     /**
      * 是否开启秒杀活动
      */
     private boolean exposed;
+
     /**
      * md5加密
      */
@@ -27,6 +29,7 @@ public class Exposer {
      * 开始秒杀时间
      */
     private long start;
+
     /**
      * 结束时间
      */
