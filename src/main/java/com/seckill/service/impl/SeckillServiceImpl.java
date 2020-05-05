@@ -51,7 +51,6 @@ public class SeckillServiceImpl implements SeckillService {
     @Override
     public Exposer exportSeckillUrl(long seckillId) {
         // 缓存优化
-
         Seckill seckill = redisDao.getSeckill(seckillId);
         if (seckill == null) {
             seckill = seckillDao.queryById(seckillId);
@@ -74,7 +73,7 @@ public class SeckillServiceImpl implements SeckillService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public SeckillExecution executeSeckill(long seckillId, long userPhone, String md5) throws SeckillCloseException, RepeatKillException, SeckillException {
+    public SeckillExecution executeSeckill(long seckillId, long userPhone, String md5) throws SeckillException {
         if (md5 == null || !md5.equals(getMD5(seckillId))) {
             throw new SeckillException("秒杀数据被篡改");
         }

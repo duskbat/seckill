@@ -15,7 +15,7 @@
         <property name="password" value="${jdbc.password}"/>
         <property name="maxPoolSize" value="30"/>
         <property name="minPoolSize" value="10"/>
-        <!-- 调用close不要commit要回滚 -->
+        <!-- 调用close不要commit,要回滚 -->
         <property name="autoCommitOnClose" value="false"/>
         <!-- 连接超时时间 -->
         <property name="checkoutTimeout" value="1000"/>

@@ -48,8 +48,7 @@ public class SeckillController {
         return "/detail";
     }
 
-    @RequestMapping(value = "/{seckillId}/exposer",
-            method = RequestMethod.POST,
+    @RequestMapping(value = "/{seckillId}/exposer", method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public SeckillResult<Exposer> exposer(@PathVariable("seckillId") Long seckillId) {
@@ -64,8 +63,7 @@ public class SeckillController {
         return seckillResult;
     }
 
-    @RequestMapping(value = "/{seckillId}/{md5}/execution",
-            method = RequestMethod.POST,
+    @RequestMapping(value = "/{seckillId}/{md5}/execution", method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public SeckillResult<SeckillExecution> execute(@PathVariable("seckillId") Long seckillId,

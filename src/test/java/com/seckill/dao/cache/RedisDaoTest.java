@@ -12,8 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration({"classpath:spring/spring-dao.xml"})
 public class RedisDaoTest {
 
-    private long id = 1001L;
-
     @Autowired
     private SeckillDao seckillDao;
 
@@ -23,6 +21,7 @@ public class RedisDaoTest {
     @Test
     public void testSeckill() {
 
+        long id = 1001L;
         Seckill seckill = redisDao.getSeckill(id);
         if (seckill == null) {
             seckill = seckillDao.queryById(id);
