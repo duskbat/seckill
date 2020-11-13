@@ -4,16 +4,16 @@ import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtostuffIOUtil;
 import com.dyuproject.protostuff.runtime.RuntimeSchema;
 import com.seckill.entity.Seckill;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 /**
  * @author blinkbat
  */
+@Slf4j
 public class RedisDao {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private final JedisPool jedisPool;
     private RuntimeSchema<Seckill> schema = RuntimeSchema.createFrom(Seckill.class);
 
@@ -35,7 +35,7 @@ public class RedisDao {
                 }
             }
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
         return null;
     }
@@ -49,7 +49,7 @@ public class RedisDao {
                 return jedis.setex(key.getBytes(), timeout, value);
             }
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
         return null;
     }
