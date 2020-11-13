@@ -27,7 +27,7 @@ import java.util.Map;
 
 @Service
 public class SeckillServiceImpl implements SeckillService {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private SeckillDao seckillDao;
@@ -96,7 +96,7 @@ public class SeckillServiceImpl implements SeckillService {
         } catch (SeckillCloseException | RepeatKillException e) {
             throw e;
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             throw new SeckillException("seckill inner error:" + e.getMessage());
         }
     }
@@ -122,7 +122,7 @@ public class SeckillServiceImpl implements SeckillService {
                 return new SeckillExecution(seckillId, SeckillStatEnum.stateOf(result));
             }
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             return new SeckillExecution(seckillId, SeckillStatEnum.INNER_ERROR);
         }
 
